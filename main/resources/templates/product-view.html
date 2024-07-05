@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+
+    <title>Product View</title>
+    <style>
+        /* Style for product-view container */
+        .product-view {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        /* Style for product image */
+        .product-view img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 3%;
+        }
+
+        /* Style for product name */
+        .title
+        {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #f5f5f5;
+            margin-left: 0;
+        }
+
+        .title h1
+        {
+            margin-left: 400px;
+            font-size: 25px;
+        }
+
+        /* Style for product description */
+        .product-view dt
+        {
+            font-size: 30px;
+            margin: 10px;
+        }
+        .product-view dd {
+            color: #ffffff;
+            font-size: 20px;
+            flex: 0 0 calc(25% - 20px);
+            margin: 0;
+            padding: 15px;
+            background-color: #000000; /* Change background color as needed */
+            box-shadow: 0 2px 5px rgb(63, 63, 63);
+            transition: transform 0.2s ease-in-out;
+            box-sizing: border-box;
+            text-align: center;
+            border-radius: 3%;
+        }
+
+        /* Style for product price */
+        .product-view p{
+            font-weight: bold;
+            margin-top: 40px;
+            font-size: 20px;
+        }
+
+        /* Style for countdown timer */
+        #timer {
+            font-size: 25px;
+            font-weight: bold;
+            color: #ff6347;
+            margin-top: 10px;
+        }
+        .home-button {
+            background-color: #00d9ff; /* Green background color */
+            color: #ffffff; /* White text color */
+            border: none; /* No border */
+            padding: 10px 20px; /* Padding */
+            text-align: center; /* Center text */
+            text-decoration: none; /* Remove underline */
+            display: inline-block; /* Display as inline-block */
+            font-size: 16px; /* Font size */
+            cursor: pointer; /* Cursor on hover */
+            border-radius:5px; /* Rounded corners */
+        }
+        .chat-button
+        {
+            background: #4CAF50;
+            color: #ffffff; /* White text color */
+            border: none; /* No border */
+            padding: 10px 20px; /* Padding */
+            text-align: center; /* Center text */
+            text-decoration: none; /* Remove underline */
+            display: inline-block; /* Display as inline-block */
+            font-size: 16px; /* Font size */
+            cursor: pointer; /* Cursor on hover */
+            border-radius:5px; /* Rounded corners */
+            margin-left: 30px;
+        }
+        .home-button:hover
+        {
+            background: #007bff;
+        }
+
+    </style>
+</head>
+<body>
+<div class="title">
+    <a href="/" class="home-button top-right">🏠Home</a>
+    <a href="/index.html" class="chat-button" th:if="${!timeLeft.isNegative()}">chat</a>
+    <h1 th:text="${selectedProduct.name.toUpperCase()}"></h1>
+</div>
+<div class="product-view">
+    <!-- Thymeleaf expressions to display the selected product details -->
+    <img th:src="@{'/get-image/' + ${selectedProduct.imageName}}" alt="Product Image"/>
+    <dt>Description:</dt>
+    <dd th:text="${selectedProduct.description}"></dd>
+    <p th:text="'Base Price: ₹' + ${selectedProduct.price}"></p>
+    <p th:text="'current Price: ₹' + ${selectedProduct.price}"></p>
+
+    <!-- Countdown timer -->
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var timeLeftMillis = /*[[${timeLeft.toMillis()}]]*/ 0;
+        var k = 0;
+        var pageReloaded = false;
+        function reloadPage() {
+            if (!pageReloaded) {
+                pageReloaded = true;
+                location.reload();
+            }
+        }
+        function updateTimer() {
+            var hours = Math.floor(timeLeftMillis / (60 * 60 * 1000));
+            var minutes = Math.floor((timeLeftMillis % (60 * 60 * 1000)) / (60 * 1000));
+            var seconds = Math.floor((timeLeftMillis % (60 * 1000)) / 1000);
+
+            var timerElement = document.getElementById('timer');
+
+            if (timeLeftMillis > 0) {
+                timerElement.textContent = 'Time left: ' + hours + ' hours ' + minutes + ' minutes ' + seconds + ' seconds';
+                timeLeftMillis -= 1000;
+            }
+            else {
+                clearInterval(timerInterval);
+                timerElement.textContent = 'Bid has ended';
+                setTimeout(reloadPage, 10000000);
+            }
+        }
+
+        var timerInterval = setInterval(updateTimer, 1000);
+        /*]]>*/
+    </script>
+
+
+    <p id="timer"></p>
+
+    <!-- Bid form -->
+<!--    <form th:action="@{/place-Bidder}" th:if="${!timeLeft.isNegative()}" method="post">-->
+<!--        <label for="bidAmount">Enter Your Bid:</label>-->
+<!--        <input type="number" id="bidAmount" name="bidAmount" required />-->
+<!--        <button type="submit" th:if="${!timeLeft.isNegative()}">Place Bid</button>-->
+<!--    </form>-->
+
+    <form th:if="${!timeLeft.isNegative()}">
+    <input type="text" id="Amount" placeholder="Enter bid amount" required>
+        <button class="btn btn-primary" type="submit">Save</button>
+    </form>
+</div>
+</body>
+</html>

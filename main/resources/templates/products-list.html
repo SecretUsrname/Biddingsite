@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link rel="stylesheet" href="./index.css" />
+</head>
+<body>
+<div class="home">
+    <div class="bitsbids-title" id="groupContainer27">
+        <div class="bitsbids">BITSBids</div>
+        <img class="group-child11" alt="" src="./public/group-58.svg" />
+        <a href="/user-profile" class="profile-button top-right">Profile</a>
+        <form th:action="@{/search}" id ="search" method="get">
+            <input type="text" name="query" placeholder="Search products...">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    <div class="home-child"></div>
+    <div class="home-item"></div>
+    <div class="home-inner"></div>
+    <div class="ongoing-bids"><h1>Ongoing Bids...</h1></div>
+
+    <!-- Update the product list section in your existing HTML -->
+
+    <div class="thumbnails-container">
+        <!-- Product Container -->
+        <div th:each="product : ${Product}" class="thymeleaf-product">
+            <img th:src="@{/get-image/{imageName}(imageName=${product.imageName})}" alt="Product Image">
+            <a th:href="@{'/product-view/' + ${product.id}}">
+                <div class="thymeleaf-product-details">
+                    <h2 th:text="${product.name}"></h2>
+                </div>
+                <div class="thymeleaf-product-price">
+                    <p th:text="'Price: ₹' + ${product.price}"></p>
+                </div>
+                <div class="thymeleaf-product-deadline">
+                    <p th:text="${#temporals.format(product.bidDeadline, 'yyyy-MM-dd HH:mm:ss')}"></p>
+                </div>
+
+            </a>
+        </div>
+    </div>
+    <div class="gap"></div>
+    <a th:href="@{/addProductForm}" class="btn btn-primary mb-2">Add Product</a>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var productDeadlines = /*[[${productDeadlines}]]*/ [];
+
+        function updateTimers() {
+            for (var i = 0; i < productDeadlines.length; i++) {
+                var timeLeftMillis = productDeadlines[i].timeLeftMillis;
+                var hours = Math.floor(timeLeftMillis / (60 * 60 * 1000));
+                var minutes = Math.floor((timeLeftMillis % (60 * 60 * 1000)) / (60 * 1000));
+                var seconds = Math.floor((timeLeftMillis % (60 * 1000)) / 1000);
+
+                var timerElement = document.getElementById('timer-' + i);
+
+                if (timeLeftMillis > 0) {
+                    timerElement.textContent = 'Time left: ' + hours + ' hours ' + minutes + ' minutes ' + seconds + ' seconds';
+                    productDeadlines[i].timeLeftMillis -= 1000;
+                } else {
+                    timerElement.textContent = 'Bid has ended';
+                }
+            }
+        }
+
+        var timerInterval = setInterval(updateTimers, 1000);
+        /*]]>*/
+    </script>
+
+
+
+</div>
+
+</body>
+</html>

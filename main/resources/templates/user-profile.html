@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .thymeleaf-product {
+            text-align: center;
+            margin: 20px;
+        }
+
+        .home-button {
+            background-color: rgba(0, 102, 255, 0.98); /* Green background color */
+            color: #ffffff; /* White text color */
+            border: none; /* No border */
+            padding: 10px 20px; /* Padding */
+            text-align: center; /* Center text */
+            text-decoration: none; /* Remove underline */
+            display: inline-block; /* Display as inline-block */
+            font-size: 16px; /* Font size */
+            cursor: pointer; /* Cursor on hover */
+            border-radius:5px; /* Rounded corners */
+        }
+        .home-button:hover{
+            background: #0015ff;
+        }
+
+        .thymeleaf-product-details,
+        .thymeleaf-product-price,
+        .Hostel-Name,
+        .Phone-Number
+        {
+            padding: 20px;
+            margin: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<a href="/" class="home-button top-right">🏠Home</a>
+<div th:each="u : ${user}" class="thymeleaf-product">
+    <div class = "user-profile">
+        <h1>PROFILE:</h1>
+    </div>
+
+    <div class="thymeleaf-product-details">
+        <p th:text="'Name: '+${u.name}"></p>
+    </div>
+    <div class="thymeleaf-product-price">
+        <p th:text="'Email: '+${u.email}"></p>
+    </div>
+    <div class = "Hostel-Name">
+        <p>Hostel Name: Vishwakarma</p>
+    </div>
+    <div class = "Phone-Number">
+        <p th:text="'Phone Number: '+${u.google_user_id}"></p>
+    </div>
+</div>
+
+</body>
+</html>

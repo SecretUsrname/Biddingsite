@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Employees</title>
+  <link rel="stylesheet" href="./start-bid.css" />
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    function validateForm() {
+      // Get the values of the form fields
+      var productName = document.getElementById('productName').value;
+      var productDescription = document.getElementById('productDescription').value;
+      var productPrice = document.getElementById('productPrice').value;
+      var bidEndTime = document.getElementById('bidEndTime').value;
+
+      // Validate that the required fields are not empty
+      if (!productName || !productDescription || !productPrice || !bidEndTime) {
+        alert('Please fill out all required fields (Name, Description, Price, Deadline)');
+        return false;
+      }
+
+      // If all validations pass, the form can be submitted
+      return true;
+    }
+    /*]]>*/
+  </script>
+</head>
+<body>
+<div class="snippet-container">
+  <h2>Add Product</h2>
+  <hr/>
+  <div class="form-container">
+    <form th:action="@{/saveProduct}" th:object="${Product}" method="POST" onsubmit="return validateForm()" enctype="multipart/form-data">
+      <input type="text" id="productName" th:field="*{name}" placeholder="Enter name of the product" required>
+      <input type="text" id="productDescription" th:field="*{description}" placeholder="Enter Description of product" required>
+      <input type="number" id="productPrice" th:field="*{price}" placeholder="Enter Price of product" required>
+      <input type="datetime-local" id="bidEndTime" th:field="*{bidEndTime}" placeholder="Select Bid End Time" required>
+      <input type="file" name="image" accept="image/*">
+      <button class="btn btn-primary" type="submit">Save</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,157 @@
+/* Add this to your existing CSS or create a new section for product styles */
+
+/* Add this to your existing CSS or create a new section for product styles */
+
+.thumbnails-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+.profile-button,#search input, #search button{
+    margin-left: auto; /* Push the items to the right */
+}
+.profile-button {
+    background-color: #4CAF50; /* Green background color */
+    color: #ffffff; /* White text color */
+    border: none; /* No border */
+    padding: 10px 20px; /* Padding */
+    text-align: center; /* Center text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Display as inline-block */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Cursor on hover */
+    border-radius: 5px; /* Rounded corners */
+}
+
+/* Position the button in the top right corner */
+.top-right {
+    position: absolute;
+    top: 11px;
+    right: 20px;
+}
+.thymeleaf-product {
+    width: calc(25% - 80px); /* Adjust the width as needed */
+    margin: 10px;
+    padding: 15px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgb(2, 252, 194);
+    transition: transform 0.2s ease-in-out;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 3%;
+}
+
+.thymeleaf-product:hover {
+    transform: scale(1.05);
+}
+
+.thymeleaf-product img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.thymeleaf-product-details,
+.thymeleaf-product-price {
+    color: #000000;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.thymeleaf-product-details h2,
+.thymeleaf-product-price p {
+    text-decoration: none; /* Remove underlines */
+}
+#search {
+    display: flex;
+    align-items: center; /* Center items vertically */
+}
+.thymeleaf-product-deadline,
+.thymeleaf-product-price {
+    color: #000000;
+    font-weight: bold;
+}
+a {
+    text-decoration: none; /* Remove underlines for all anchors */
+}
+/* Add some space between product list and Add Product button */
+.gap {
+    margin-top: 50px; /* Adjust the value as needed */
+}
+#search input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+
+#search button {
+    background-color: #007BFF; /* Blue background color */
+    color: #fff; /* White text color */
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+#search button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.bitsbids-title {
+    background-color: #f5f5f5; /* Light background color */
+    padding: 10px; /* Add some padding for spacing */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+}
+
+.bitsbids {
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+/* Container for the search bar */
+.search-container {
+    position: relative;
+    margin: 20px;
+}
+
+/* Style for the search input */
+.search-input {
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+/* Style for the search button */
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+/* Primary Button */
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+}
+
+/* Button Hover Effect */
+.btn:hover {
+    background-color: #0056b3; /* Choose a slightly darker shade for hover effect */
+}
+
+/* Margin for the button */
+.mb-2 {
+    margin-bottom: 20px; /* Adjust as needed */
+}
